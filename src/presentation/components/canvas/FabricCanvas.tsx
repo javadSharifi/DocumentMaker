@@ -391,7 +391,7 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
       };
 
       const onObjectModified = (
-        opt: TPointerEventInfo & { target?: FabricObject },
+        opt: { target?: FabricObject },
       ) => {
         const target = opt.target as FabricZoneObject | undefined;
         if (!target?.data?.id || !onZoneUpdate) return;

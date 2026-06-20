@@ -37,7 +37,7 @@ export const FormFiller: React.FC = () => {
     return (
       <LoadingState
         isLoading={isLoading}
-        error={error}
+        error={error?.message || null}
         showNotFound={!currentTemplate && !isLoading && !error}
         loadingText={t("form_filler.loading")}
         errorPrefix={t("form_filler.error", { message: "" }).replace(

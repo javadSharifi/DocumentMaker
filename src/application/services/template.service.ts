@@ -3,7 +3,11 @@ import { templateRepository } from "../../infrastructure/repositories/dexie.repo
 import type { Template } from "../../core/types/domain";
 
 export class TemplateService {
-  constructor(private readonly repo: ITemplateRepository) {}
+  private readonly repo: ITemplateRepository;
+
+  constructor(repo: ITemplateRepository) {
+    this.repo = repo;
+  }
 
   async getById(id: string): Promise<Template> {
     const template = await this.repo.getById(id);

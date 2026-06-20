@@ -3,10 +3,13 @@ import { documentRepository, templateRepository } from "../../infrastructure/rep
 import type { Document, Template } from "../../core/types/domain";
 
 export class DocumentService {
-  constructor(
-    private readonly docRepo: IDocumentRepository,
-    private readonly templateRepo: ITemplateRepository,
-  ) {}
+  private readonly docRepo: IDocumentRepository;
+  private readonly templateRepo: ITemplateRepository;
+
+  constructor(docRepo: IDocumentRepository, templateRepo: ITemplateRepository) {
+    this.docRepo = docRepo;
+    this.templateRepo = templateRepo;
+  }
 
   async getTemplateById(id: string): Promise<Template> {
     const template = await this.templateRepo.getById(id);
