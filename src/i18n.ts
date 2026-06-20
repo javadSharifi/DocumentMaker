@@ -91,6 +91,10 @@ const resources = {
         welcome: "خوش آمدید",
         privacy:
           "تمامی اطلاعات شما به صورت محلی پردازش شده و هرگز از دستگاه شما خارج نمی‌شود.",
+        privacy_modal_title: "پردازش کاملاً امن و آفلاین",
+        privacy_modal_desc:
+          "این ابزار کاملاً در مرورگر شما اجرا می‌شود. هیچ سند، تصویر یا داده‌ای به هیچ سروری ارسال نمی‌شود و تمام اطلاعات منحصراً روی دستگاه خودتان ذخیره می‌گردند.",
+        privacy_modal_button: "متوجه شدم",
         setup: "تنظیمات اولیه",
         language: "زبان برنامه",
         theme: "پوسته ظاهری",
@@ -128,6 +132,10 @@ const resources = {
         welcome: "Welcome",
         privacy:
           "All your data is processed locally and never leaves your device.",
+        privacy_modal_title: "Secure & Offline Processing",
+        privacy_modal_desc:
+          "This tool runs entirely in your browser. No document, image, or data is sent to any server. All information remains exclusively on your device.",
+        privacy_modal_button: "I Understand",
         setup: "Quick Setup",
         language: "Language",
         theme: "Appearance",

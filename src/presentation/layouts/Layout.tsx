@@ -1,5 +1,5 @@
 import React from "react";
-import { Languages, Sun, Moon } from "lucide-react";
+import { Languages, Sun, Moon, Github } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useAppStore } from "../../application/store/app.store";
 import { useLanguageStore } from "../../application/store/language.store";
@@ -50,21 +50,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             )}
           </Button>
 
-          {/* <a
-            href="https://github.com/javadSharifi/FormOverlay"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:block"
-          >
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-2 border-base-300 bg-base-200 hover:bg-primary hover:text-primary-content hover:border-primary transition-all shadow-sm"
+          <Button variant="ghost" size="icon" asChild>
+            <a
+              href="https://github.com/javadSharifi/DocumentMaker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base-content/60 hover:text-primary hover:bg-primary/10 transition-all"
             >
-              <Github className="h-4 w-4" />
-              {t("layout.github")}
-            </Button>
-          </a> */}
+              <Github className="h-5 w-5" />
+            </a>
+          </Button>
         </div>
       </header>
 

@@ -101,6 +101,7 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
     const fabricRef = useRef<Canvas | null>(null);
 
     const isUserEditingRef = useRef(false);
+    const justModifiedIdRef = useRef<string | null>(null);
 
     const propsRef = useRef(props);
     useEffect(() => {
@@ -134,12 +135,34 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
 
         const existing = objectMap.get(zone.id);
         if (existing) {
+          const wasJustModified = justModifiedIdRef.current === zone.id;
+          if (wasJustModified) {
+            justModifiedIdRef.current = null;
+          }
+
           if (mode === "edit") {
+            if (!wasJustModified) {
+              const currentLeft = existing.left;
+              const currentTop = existing.top;
+              const currentW = existing.getScaledWidth();
+              const currentH = existing.getScaledHeight();
+              const posChanged =
+                Math.abs(currentLeft - pixelX) > 0.5 ||
+                Math.abs(currentTop - pixelY) > 0.5 ||
+                Math.abs(currentW - pixelW) > 0.5 ||
+                Math.abs(currentH - pixelH) > 0.5;
+              if (posChanged) {
+                existing.set({
+                  left: pixelX,
+                  top: pixelY,
+                  width: pixelW,
+                  height: pixelH,
+                  scaleX: 1,
+                  scaleY: 1,
+                });
+              }
+            }
             existing.set({
-              left: pixelX,
-              top: pixelY,
-              width: pixelW,
-              height: pixelH,
               stroke: zone.id === selectedZoneId ? "#ef4444" : "#3b82f6",
             });
           } else {
@@ -153,10 +176,28 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
               style.fontSize,
               canvasHeight,
             );
+            if (!wasJustModified) {
+              const currentLeft = existing.left;
+              const currentTop = existing.top;
+              const currentW = existing.getScaledWidth();
+              const currentH = existing.getScaledHeight();
+              const targetLeft = style.direction === "rtl" ? pixelX + pixelW : pixelX;
+              const posChanged =
+                Math.abs(currentLeft - targetLeft) > 0.5 ||
+                Math.abs(currentTop - pixelY) > 0.5 ||
+                Math.abs(currentW - pixelW) > 0.5 ||
+                Math.abs(currentH - pixelH) > 0.5;
+              if (posChanged) {
+                existing.set({
+                  left: targetLeft,
+                  top: pixelY,
+                  width: pixelW,
+                  scaleX: 1,
+                  scaleY: 1,
+                });
+              }
+            }
             existing.set({
-              left: style.direction === "rtl" ? pixelX + pixelW : pixelX,
-              top: pixelY,
-              width: pixelW,
               fontSize: pixelFontSize,
               fill: style.color,
               text: textValue,
@@ -396,15 +437,26 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
         const target = opt.target as FabricZoneObject | undefined;
         if (!target?.data?.id || !onZoneUpdate) return;
 
+        justModifiedIdRef.current = target.data.id;
+
+        const effectiveWidth = target.getScaledWidth();
+        const effectiveHeight = target.getScaledHeight();
+        const leftEdge = target.originX === "right"
+          ? target.left - effectiveWidth
+          : target.left;
+        const topEdge = target.originY === "bottom"
+          ? target.top - effectiveHeight
+          : target.top;
+
         onZoneUpdate(target.data.id, {
-          x: CoordinateTransformer.toPercent(target.left, canvas.width),
-          y: CoordinateTransformer.toPercent(target.top, canvas.height),
+          x: CoordinateTransformer.toPercent(leftEdge, canvas.width),
+          y: CoordinateTransformer.toPercent(topEdge, canvas.height),
           width: CoordinateTransformer.toPercent(
-            target.getScaledWidth(),
+            effectiveWidth,
             canvas.width,
           ),
           height: CoordinateTransformer.toPercent(
-            target.getScaledHeight(),
+            effectiveHeight,
             canvas.height,
           ),
         });
@@ -455,15 +507,26 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
         const target = opt.target as FabricZoneObject | undefined;
         if (!target?.data?.id || !onZoneUpdate) return;
 
+        justModifiedIdRef.current = target.data.id;
+
+        const effectiveWidth = target.getScaledWidth();
+        const effectiveHeight = target.getScaledHeight();
+        const leftEdge = target.originX === "right"
+          ? target.left - effectiveWidth
+          : target.left;
+        const topEdge = target.originY === "bottom"
+          ? target.top - effectiveHeight
+          : target.top;
+
         onZoneUpdate(target.data.id, {
-          x: CoordinateTransformer.toPercent(target.left, canvas.width),
-          y: CoordinateTransformer.toPercent(target.top, canvas.height),
+          x: CoordinateTransformer.toPercent(leftEdge, canvas.width),
+          y: CoordinateTransformer.toPercent(topEdge, canvas.height),
           width: CoordinateTransformer.toPercent(
-            target.getScaledWidth(),
+            effectiveWidth,
             canvas.width,
           ),
           height: CoordinateTransformer.toPercent(
-            target.getScaledHeight(),
+            effectiveHeight,
             canvas.height,
           ),
         });

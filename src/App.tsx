@@ -3,6 +3,7 @@ import { Dashboard } from "./presentation/pages/Dashboard";
 import { TemplateEditor } from "./presentation/pages/TemplateEditor";
 import { FormFiller } from "./presentation/pages/FormFiller";
 import { Toaster as HotToaster } from "react-hot-toast";
+import { PrivacyWelcomeModal } from "./presentation/components/PrivacyWelcomeModal";
 function App() {
   return (
     <Router>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/editor/:id" element={<TemplateEditor />} />
         <Route path="/fill/:id" element={<FormFiller />} />
       </Routes>
+      <PrivacyWelcomeModal />
       <HotToaster
         toastOptions={{
           className:

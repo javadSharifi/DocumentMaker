@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { ArrowLeft, Save, Upload, Loader2, Edit3, Github } from "lucide-react";
+import { ArrowLeft, Save, Upload, Loader2, Edit3 } from "lucide-react";
 import { useEditorStore } from "../../../application/store/editor.store";
 import { useSaveTemplateMutation } from "../../../application/hooks/useTemplateMutations";
 
@@ -62,12 +62,7 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({ onUploadClick }) =
           </div>
         </div>
 
-        <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
-          <Button variant="ghost" size="icon" asChild>
-            <a href="https://github.com/javadSharifi/DocumentMaker" target="_blank" rel="noopener noreferrer" className="text-base-content/60 hover:text-base-content h-8 w-8 md:h-9 md:w-9">
-              <Github className="h-4 w-4 md:h-5 md:w-5" />
-            </a>
-          </Button>
+        <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
           <Button
             variant="outline"
             size="sm"
