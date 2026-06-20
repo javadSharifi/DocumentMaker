@@ -39,6 +39,22 @@
 
 ---
 
+## تصاویر
+
+### پیش‌خوان و مدیریت قالب‌ها
+
+![پیش‌خوان](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-dashboard.webp)
+
+### ویرایشگر بوم قالب
+
+![ویرایشگر](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-editor.webp)
+
+### پرکننده فرم و خروجی PDF
+
+![پرکننده فرم](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-filler.webp)
+
+---
+
 ## تکنولوژی‌ها
 
 | لایه        | تکنولوژی                                 |

@@ -45,15 +45,15 @@ All processing — image rendering, form data, PDF generation, and template stor
 
 ### Dashboard & Template Management
 
-![Dashboard](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/public/img/placeholder-dashboard.webp)
+![Dashboard](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-dashboard.webp)
 
 ### Canvas Template Editor
 
-![Editor](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/public/img/placeholder-editor.webp)
+![Editor](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-editor.webp)
 
 ### Form Filler & PDF Export
 
-![Form Filler](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/public/img/placeholder-filler.webp)
+![Form Filler](https://raw.githubusercontent.com/javadSharifi/DocumentMaker/main/src/public/img/placeholder-filler.webp)
 
 ---
 
