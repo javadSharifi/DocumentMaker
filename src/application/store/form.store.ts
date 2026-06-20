@@ -12,6 +12,7 @@ interface FormState {
   createDocument: (templateId: string, initialValues: Record<string, string>, defaultDirection: Direction) => void;
   updateDocumentValues: (values: Record<string, string>) => void;
   updateDocumentStyle: (zoneId: string, style: Partial<ZoneStyle>) => void;
+  updateZoneCoordinates: (zoneId: string, coords: { x: number; y: number; width: number; height: number }) => void;
   selectZone: (id: string | null) => void;
   setDocument: (doc: Document) => void;
   reset: () => void;
@@ -50,6 +51,19 @@ export const useFormStore = create<FormState>()(
           createdAt: Date.now(),
           updatedAt: Date.now(),
         };
+      });
+    },
+
+    updateZoneCoordinates: (zoneId, coords) => {
+      set((state) => {
+        if (!state.currentTemplate) return;
+        const zone = state.currentTemplate.zones.find((z) => z.id === zoneId);
+        if (zone) {
+          zone.x = coords.x;
+          zone.y = coords.y;
+          zone.width = coords.width;
+          zone.height = coords.height;
+        }
       });
     },
 

@@ -5,6 +5,7 @@ import { format } from "date-fns-jalali";
 import { useFormStore } from "@/application/store/form.store";
 import { useLanguageStore } from "@/application/store/language.store";
 import { useTemplateQuery } from "./useTemplateMutations";
+import type { Zone } from "../../core/types/domain";
 
 export const useFormFiller = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +18,7 @@ export const useFormFiller = () => {
   const setTemplate = useFormStore((s) => s.setTemplate);
   const createDocument = useFormStore((s) => s.createDocument);
   const updateDocumentValues = useFormStore((s) => s.updateDocumentValues);
+  const updateZoneCoordinates = useFormStore((s) => s.updateZoneCoordinates);
   const selectZone = useFormStore((s) => s.selectZone);
   const resetStore = useFormStore((s) => s.reset);
 
@@ -69,6 +71,13 @@ export const useFormFiller = () => {
     [setValue],
   );
 
+  const handleZoneUpdate = useCallback(
+    (id: string, updates: Partial<Zone>) => {
+      updateZoneCoordinates(id, updates as { x: number; y: number; width: number; height: number });
+    },
+    [updateZoneCoordinates],
+  );
+
   return {
     id,
     currentTemplate,
@@ -81,5 +90,6 @@ export const useFormFiller = () => {
     formValues,
     selectZone,
     handleCanvasValueChange,
+    handleZoneUpdate,
   };
 };

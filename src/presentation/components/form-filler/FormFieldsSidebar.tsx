@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { LayoutGrid } from "lucide-react";
 import { cn } from "../../lib/utils";
 import type { Zone, ZoneStyle } from "../../../core/types/domain";
@@ -23,6 +23,16 @@ export const FormFieldsSidebar: React.FC<FormFieldsSidebarProps> = ({
   title,
   isMobile = false,
 }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scrollRef.current || !selectedZoneId) return;
+    const el = scrollRef.current.querySelector(`[data-zone-id="${selectedZoneId}"]`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selectedZoneId]);
+
   return (
     <div
       className={cn(
@@ -57,7 +67,7 @@ export const FormFieldsSidebar: React.FC<FormFieldsSidebarProps> = ({
           isMobile ? "p-3 pt-2" : "p-4 md:p-6 pt-3 md:pt-4",
         )}
       >
-        <div className={cn(isMobile ? "space-y-2" : "space-y-3 md:space-y-4")}>
+        <div ref={scrollRef} className={cn(isMobile ? "space-y-2" : "space-y-3 md:space-y-4")}>
           {zones.map((zone) => {
             const style = styles?.[zone.id];
             const isActive = selectedZoneId === zone.id;
@@ -65,6 +75,7 @@ export const FormFieldsSidebar: React.FC<FormFieldsSidebarProps> = ({
             return (
               <div
                 key={zone.id}
+                data-zone-id={zone.id}
                 className={cn(
                   "space-y-1.5 rounded-btn transition-all duration-300 cursor-pointer border",
                   isMobile ? "p-2.5" : "p-3 md:p-4",

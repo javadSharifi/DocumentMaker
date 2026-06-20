@@ -442,16 +442,47 @@ export const FabricCanvas = forwardRef<FabricCanvasRef, FabricCanvasProps>(
         }
       };
 
+      const onMouseDown = (opt: TPointerEventInfo) => {
+        const target = opt.target as FabricZoneObject | undefined;
+        if (target?.data?.id && onZoneSelect) {
+          onZoneSelect(target.data.id);
+        }
+      };
+
+      const onObjectModified = (
+        opt: { target?: FabricObject },
+      ) => {
+        const target = opt.target as FabricZoneObject | undefined;
+        if (!target?.data?.id || !onZoneUpdate) return;
+
+        onZoneUpdate(target.data.id, {
+          x: CoordinateTransformer.toPercent(target.left, canvas.width),
+          y: CoordinateTransformer.toPercent(target.top, canvas.height),
+          width: CoordinateTransformer.toPercent(
+            target.getScaledWidth(),
+            canvas.width,
+          ),
+          height: CoordinateTransformer.toPercent(
+            target.getScaledHeight(),
+            canvas.height,
+          ),
+        });
+      };
+
       canvas.on("text:editing:entered", onEditingEntered);
       canvas.on("text:editing:exited", onEditingExited);
       canvas.on("text:changed", onTextChanged);
+      canvas.on("mouse:down", onMouseDown);
+      canvas.on("object:modified", onObjectModified);
 
       return () => {
         canvas.off("text:editing:entered", onEditingEntered);
         canvas.off("text:editing:exited", onEditingExited);
         canvas.off("text:changed", onTextChanged);
+        canvas.off("mouse:down", onMouseDown);
+        canvas.off("object:modified", onObjectModified);
       };
-    }, [mode, onValueChange]);
+    }, [mode, onValueChange, onZoneSelect, onZoneUpdate]);
 
     return (
       <div

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Download, Printer, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Download, Printer, Image as ImageIcon, Github } from "lucide-react";
 import { Button } from "../ui/button";
 
 interface FormToolbarProps {
@@ -42,6 +42,11 @@ export const FormToolbar: React.FC<FormToolbarProps> = ({
       </div>
 
       <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+        <Button variant="ghost" size="icon" asChild>
+          <a href="https://github.com/javadSharifi/DocumentMaker" target="_blank" rel="noopener noreferrer" className="text-base-content/60 hover:text-base-content">
+            <Github className="h-4 w-4 md:h-5 md:w-5" />
+          </a>
+        </Button>
         <Button
           variant="outline"
           onClick={onExportImage}

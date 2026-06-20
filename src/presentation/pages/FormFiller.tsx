@@ -28,6 +28,7 @@ export const FormFiller: React.FC = () => {
     formValues,
     selectZone,
     handleCanvasValueChange,
+    handleZoneUpdate,
   } = useFormFiller();
 
   const { canvasRef, handlePrint, handleExportPdf, handleExportImage } =
@@ -91,6 +92,7 @@ export const FormFiller: React.FC = () => {
                 styles={currentDocument?.styles}
                 selectedZoneId={selectedZoneId}
                 onZoneSelect={selectZone}
+                onZoneUpdate={handleZoneUpdate}
                 onValueChange={handleCanvasValueChange}
               />
             </div>

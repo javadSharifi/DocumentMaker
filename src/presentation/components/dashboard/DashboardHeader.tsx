@@ -1,4 +1,6 @@
 import React from "react";
+import { Github } from "lucide-react";
+import { Button } from "../ui/button";
 import { SearchBar } from "./SearchBar";
 import { DashboardActions } from "./DashboardActions";
 
@@ -27,6 +29,11 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-base-content uppercase">
           {title}
         </h1>
+        <Button variant="ghost" size="icon" asChild>
+          <a href="https://github.com/javadSharifi/DocumentMaker" target="_blank" rel="noopener noreferrer">
+            <Github className="h-5 w-5 md:h-6 md:w-6" />
+          </a>
+        </Button>
       </div>
 
       <div className="flex flex-col md:flex-row gap-3 md:gap-4 p-3 md:p-4 rounded-box bg-base-200 border border-base-300 shadow-sm">

@@ -14,6 +14,7 @@ interface CanvasContainerProps {
   styles?: Record<string, ZoneStyle>;
   selectedZoneId: string | null;
   onZoneSelect: (id: string | null) => void;
+  onZoneUpdate?: (id: string, updates: Partial<Zone>) => void;
   onValueChange: (id: string, value: string) => void;
 }
 
@@ -31,6 +32,7 @@ export const CanvasContainer = forwardRef<
       styles,
       selectedZoneId,
       onZoneSelect,
+      onZoneUpdate,
       onValueChange,
     },
     ref,
@@ -51,6 +53,7 @@ export const CanvasContainer = forwardRef<
           styles={styles}
           selectedZoneId={selectedZoneId}
           onZoneSelect={onZoneSelect}
+          onZoneUpdate={onZoneUpdate}
           onValueChange={onValueChange}
         />
       </div>
