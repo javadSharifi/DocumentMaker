@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* ۱. تعریف Font-Face (خارج از بلوک theme) */
+@font-face {
+  font-family: "IRANSans";
+  src: url("./assets/fonts/IRANSansWeb_Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSans";
+  src: url("./assets/fonts/IRANSansWeb_Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSans";
+  src: url("./assets/fonts/IRANSansWeb.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans:
+    "IRANSans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-primary: var(--p);
+  --color-primary-content: var(--pc);
+
+  --color-secondary: var(--s);
+  --color-secondary-content: var(--sc);
+
+  --color-neutral: var(--n);
+  --color-neutral-content: var(--nc);
+
+  --color-base-100: var(--b1);
+  --color-base-200: var(--b2);
+  --color-base-300: var(--b3);
+  --color-base-content: var(--bc);
+
+  --color-info: #3abff8;
+  --color-success: #36d399;
+  --color-warning: #fbbd23;
+  --color-error: #f87272;
+
+  --radius-box: 1rem;
+  --radius-btn: 0.5rem;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --p: #641ae6; /* Primary */
+    --pc: #ffffff; /* Primary Content */
+    --s: #d926a9; /* Secondary */
+    --sc: #ffffff; /* Secondary Content */
+    --n: #2b3440; /* Neutral */
+    --nc: #d8dde4; /* Neutral Content */
+    --b1: #ffffff; /* Base 100 (Background) */
+    --b2: #f2f2f2; /* Base 200 (Sidebar/Nested) */
+    --b3: #e5e6e6; /* Base 300 (Border/Hover) */
+    --bc: #1f2937; /* Base Content (Text) */
+  }
+  .dark {
+    /* تم تاریک بهینه (Inspired by Linear/GitHub Dark Dim) */
+    --p: #818cf8; /* بنفش-نیلی روشن‌تر برای خوانایی بهتر */
+    --pc: #000000;
+    --s: #f472b6;
+    --sc: #000000;
+
+    /* لایه‌بندی برای ایجاد عمق */
+    --b1: #0f172a; /* (Base 100) پس‌زمینه اصلی: سرمه‌ای بسیار تیره و نرم */
+    --b2: #1e293b; /* (Base 200) پنل‌ها و سایدبار: یک درجه روشن‌تر برای تفکیک */
+    --b3: rgb(21, 43, 75); /* (Base 300) مرزها و هاور: کاملاً مشخص و واضح */
+
+    /* اصلاح متن برای کاهش خستگی چشم */
+    --bc: #f1f5f9; /* متن اصلی: سفید مایل به آبی (آرامش‌بخش‌تر از سفید خالص) */
+    --n: #1e293b;
+    --nc: #94a3b8; /* متن ثانویه: خاکستری-آبی برای کاهش نویز بصری */
+  }
+}
